@@ -1,0 +1,5 @@
+td,th{
+    border: 1px solid rgb(156, 154, 154);
+    border-collapse: collapse;
+    padding: 0.5em;
+}

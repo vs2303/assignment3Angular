@@ -1,0 +1,19 @@
+<br>
+<div class="container">
+  <input type="text" class="form-control" id="name" required [(ngModel)]="resultsToBeDisplayed" name="name"> <br>
+  <button (click)="showData()" type="submit">Display</button>
+  <hr>
+  <!-- <div>
+    <p *ngFor="let stud of studentDetail">
+      {{stud.id}} | {{stud.name}} | {{stud.marks}} <br>
+    </p>
+  </div> -->
+  <table>
+    <tr *ngIf="resultsToBeDisplayed">
+      <th>ID</th><th>Name</th><th>Marks</th>
+    </tr>
+    <tr *ngFor="let stud of studentDetail">
+      <td>{{stud.id}}</td><td>{{stud.name}}</td><td>{{stud.marks}}</td>
+    </tr>
+  </table>
+</div>

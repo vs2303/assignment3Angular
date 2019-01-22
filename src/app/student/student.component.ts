@@ -15,7 +15,8 @@ export class StudentComponent implements OnInit {
   studentForm: FormGroup;
   forCnt:number
   submitted = false;
-
+  showForm:boolean=false
+  hideBox:boolean=false
   ngOnInit() {
     /* Initiate the form structure */
     this.studentForm = this.fb.group({
@@ -45,6 +46,12 @@ export class StudentComponent implements OnInit {
   }
 
   addSellingPoint() {
+  
+    if(this.studentForm.controls.title.value){
+      this.showForm=true
+      this.hideBox=true
+    }
+    
     this.forCnt = this.studentForm.value.title
     console.log(this.forCnt)
     for(let i=1;i<this.forCnt;i++){
@@ -58,7 +65,7 @@ export class StudentComponent implements OnInit {
 
   createNew():FormGroup{
     return this.fb.group({
-      id:['',Validators.required],
+      // id:['',Validators.required],
       name:['',Validators.required],
       marks:['',Validators.compose([Validators.required,Validators.max(100),Validators.min(0)])]
     })

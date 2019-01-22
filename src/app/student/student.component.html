@@ -4,44 +4,48 @@
 
     <form [formGroup]="studentForm" (ngSubmit)="passValueToDb()">
 
-      <label>
-        No of Students: <input type="number" formControlName="title" /><button class="btn" type="button" (click)="addSellingPoint()">Add Fields</button>
-      </label>
-      <h2>Add here</h2>
+      <label>No of Students:</label> <input type="number" formControlName="title"  /> <br>
+      <button class="btn btn-primary" type="button" [disabled]="hideBox" (click)="addSellingPoint()">Add Fields</button>
+      
 
-      <div formArrayName="student_Details">
-        
-        <div *ngFor="let item of studentArray.controls; let pointIndex=index" [formGroupName]="pointIndex">
-          <hr>
-          <label>Student Detail {{pointIndex + 1}}:</label>
-          <tr>
-            <td>
-                <input type="number" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls[pointIndex].controls.id.errors }" placeholder="Roll No" />
-                <div *ngIf="submitted && f.controls[pointIndex].controls.id.errors" class="invalid-feedback">
-                    <div *ngIf="f.controls[pointIndex].controls.id.errors.required">Roll No is required</div>
-                </div>
-            </td>
-            <td>
-                <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls[pointIndex].controls.name.errors }" placeholder="Name"/>
-                <div *ngIf="submitted && f.controls[pointIndex].controls.name.errors" class="invalid-feedback">
-                    <div *ngIf="f.controls[pointIndex].controls.name.errors.required">Name is required</div>
-                </div>
-            </td>
-            <td>
-                <input type="number" formControlName="marks" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls[pointIndex].controls.marks.errors }" placeholder="Marks"/>
-                <div *ngIf="submitted && f.controls[pointIndex].controls.marks.errors" class="invalid-feedback">
-                    <div *ngIf="f.controls[pointIndex].controls.marks.errors.required">Marks are required</div>
-                    <div *ngIf="f.controls[pointIndex].controls.marks.errors.min">Marks cannot be less than 0</div>
-                    <div *ngIf="f.controls[pointIndex].controls.marks.errors.max">Max mark is 100</div>
-                </div>
-            </td>
-            <td>
-                <button class="btn btn-danger" type="button" (click)="deleteSellingPoint(pointIndex)">Delete</button>
-            </td>
-          </tr>
+      <div *ngIf="showForm">
+        <h2>Add here</h2>
+
+        <div formArrayName="student_Details">
+          
+          <div *ngFor="let item of studentArray.controls; let pointIndex=index" [formGroupName]="pointIndex">
+            <hr>
+            <label>Student Detail {{pointIndex + 1}}:</label>
+            <tr>
+              <!-- <td>
+                  <input type="number" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls[pointIndex].controls.id.errors }" placeholder="Roll No" />
+                  <div *ngIf="submitted && f.controls[pointIndex].controls.id.errors" class="invalid-feedback">
+                      <div *ngIf="f.controls[pointIndex].controls.id.errors.required">Roll No is required</div>
+                  </div>
+              </td> -->
+              <td>
+                  <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls[pointIndex].controls.name.errors }" placeholder="Name"/>
+                  <div *ngIf="submitted && f.controls[pointIndex].controls.name.errors" class="invalid-feedback">
+                      <div *ngIf="f.controls[pointIndex].controls.name.errors.required">Name is required</div>
+                  </div>
+              </td>
+              <td>
+                  <input type="number" formControlName="marks" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls[pointIndex].controls.marks.errors }" placeholder="Marks"/>
+                  <div *ngIf="submitted && f.controls[pointIndex].controls.marks.errors" class="invalid-feedback">
+                      <div *ngIf="f.controls[pointIndex].controls.marks.errors.required">Marks are required</div>
+                      <div *ngIf="f.controls[pointIndex].controls.marks.errors.min">Marks cannot be less than 0</div>
+                      <div *ngIf="f.controls[pointIndex].controls.marks.errors.max">Max mark is 100</div>
+                  </div>
+              </td>
+              <!-- <td>
+                  <button class="btn btn-danger" type="button" (click)="deleteSellingPoint(pointIndex)">Delete</button>
+              </td> -->
+            </tr>
+          </div>
         </div>
+        <button class="btn btn-primary" type="submit">Submit Data</button>
       </div>
-      <button class="btn btn-primary" type="submit">Submit Data</button>
+      
     </form>
 
     <!-- {{ this.studentForm.value.title }} -->

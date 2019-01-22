@@ -41,7 +41,7 @@ export class StudentDisplayComponent implements OnInit {
             this.studentDetail=this.db.getDetail().slice(0,this.rTBD);
         }
         else{
-            alert("Too less Data")
+            alert("Only "+(this.db.getDetail().length) +" Records there")
         }
         
       }else{

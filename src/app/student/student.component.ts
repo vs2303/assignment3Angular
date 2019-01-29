@@ -34,10 +34,17 @@ export class StudentComponent implements OnInit {
         if (this.studentForm.invalid) {
             return;
         }else{
+          // console.log(this.studentForm.value.student_Details)
+          this.db.pushData(this.studentForm.value.student_Details).subscribe(data=>{
+            // console.log(JSON.stringify(data)+"received data")
+            console.log(data.message)
+          })
           alert("Data submitted")
         }
     console.log(this.studentForm.controls.student_Details)
-    this.db.pushData(this.studentForm.value.student_Details);
+    //Here I am doing Changes
+    // this.db.pushData(this.studentForm.value.student_Details);
+
   }
   
 

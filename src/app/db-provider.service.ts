@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import StudentInfo from './student-info'
 import { Student } from './student';
 import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 
 interface myData{
@@ -21,15 +22,22 @@ export class DbProviderService {
       return 1;
     return 0;
   }
-
+  fetchedArray:Student[]
+  getDetailFromServer():Observable<Student[]>{
+    // return StudentInfo.sort(this.compare).reverse()
+    return this.http.get<Student[]>('/api/studentrecord.php');
+  }
   getDetail():Student[]{
-    return StudentInfo.sort(this.compare).reverse()
+    this.getDetailFromServer().subscribe(data=>{
+      this.fetchedArray = data;
+    })
+    return this.fetchedArray.sort(this.compare).reverse()
   }
   pushData(newData:Student[]){
-    for(let i of newData){
-      StudentInfo.push(i)
-    }
-    
+    // for(let i of newData){
+    //   StudentInfo.push(i)
+    // }
+    return this.http.post('/api/insertrecord.php',newData);
   }
 
   private loggedInStatus = false;

@@ -7,14 +7,19 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
 import { LogoutComponent } from './logout/logout.component'
+import { LoginPageGuard } from './login-page.guard';
 const routes: Routes = [
-  {path:'enterDatail',component:StudentComponent},
-  {path:'showData',component:StudentDisplayComponent},
-  {path:'login',component:LoginComponent},
-  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
-  {path:'logout',component:LogoutComponent},
-  {path:'',component:HomeComponent,canActivate:[AuthGuard]}
-  
+  {path:'',redirectTo: 'home', pathMatch: 'full',canActivate:[AuthGuard]},
+  {path:'login',component:LoginComponent,canActivate:[LoginPageGuard]},
+  {path:'home',component:HomeComponent,
+    children:[
+      {path:'',component:StudentComponent,canActivate:[AuthGuard]},
+      {path:'enterDatail',component:StudentComponent,canActivate:[AuthGuard]},
+      {path:'showData',component:StudentDisplayComponent,canActivate:[AuthGuard]}  
+  ],
+  canActivate:[AuthGuard]},
+  {path:'logout',component:LogoutComponent,canActivate:[AuthGuard]},
+  {path: '**', component: HomeComponent,canActivate:[AuthGuard]}  
 ];
 
 @NgModule({

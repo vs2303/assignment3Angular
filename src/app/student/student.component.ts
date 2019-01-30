@@ -37,9 +37,13 @@ export class StudentComponent implements OnInit {
           // console.log(this.studentForm.value.student_Details)
           this.db.pushData(this.studentForm.value.student_Details).subscribe(data=>{
             // console.log(JSON.stringify(data)+"received data")
-            console.log(data.message)
+            if(data.success){
+              alert(data.message)
+            }
+            else{
+              alert(data.message)
+            }
           })
-          alert("Data submitted")
         }
     console.log(this.studentForm.controls.student_Details)
     //Here I am doing Changes

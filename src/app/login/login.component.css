@@ -1,9 +1,19 @@
-.login{
-    margin:100px auto;
-}
+
 table{
     display: block;
-    margin: 30px auto;
-    width: 60vw;
+    margin:0 auto;
+    width: 36%;
     text-align: center;
+}
+form{
+    display: block;
+    margin:30vh auto;
+    width: 60vw;
+    height: 15em;
+    text-align: center;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius:10px;
+}
+tr td{
+    text-align: center
 }

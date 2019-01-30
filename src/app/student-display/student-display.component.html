@@ -1,6 +1,7 @@
+
 <br>
 <div class="container">
-  <input type="number" class="form-control" required min="1" max="fArrayLen" id="name" required [(ngModel)]="resultsTBD" name="name"> <br>
+  <input type="number" class="form-control" required min="1" max="fArrayLen" id="name" required [(ngModel)]="resultsTBD" name="name" placeholder="Enter the number of records to be displayed"> <br>
   
   <button (click)="showData()" type="submit">Display</button>
   <hr>
@@ -11,11 +12,11 @@
   </div> -->
   <table>
     <tr *ngIf="showTable">
-      <!-- <th>ID</th> -->
+      <th>ID</th>
       <th>Name</th><th>Marks</th>
     </tr>
     <tr *ngFor="let stud of studentDetail">
-      <!-- <td>{{stud.id}}</td> -->
+      <td>{{stud.id}}</td>
       <td>{{stud.name}}</td><td>{{stud.marks}}</td>
     </tr>
   </table>

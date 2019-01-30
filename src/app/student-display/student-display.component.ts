@@ -10,9 +10,8 @@ import { Student } from '../student';
 export class StudentDisplayComponent implements OnInit {
   constructor(private db:DbProviderService) { }
   ngOnInit() {
-    this.fetchedArray=this.db.getDetail();
-    this.fArrayLen=this.db.getDetail().length;
-    console.log(this.fArrayLen)
+    // this.fetchedArray=this.db.getDetail();
+    // this.fArrayLen=this.db.getDetail().length;
   }
 
   wFlag:boolean=false
@@ -26,20 +25,22 @@ export class StudentDisplayComponent implements OnInit {
   getDetail(){
       // console.log(this.resultsTBD)
       // this.showTable=true
+      this.fetchedArray=this.db.getDetail();
+      this.fArrayLen=this.db.getDetail().length;
       if(this.resultsTBD){
-        if(this.resultsTBD<=this.db.getDetail().length){
+        if(this.resultsTBD<=this.fArrayLen){
             this.showTable=true
             this.rTBD=this.resultsTBD
-            // do{
-            //   console.log(this.rTBD)
-            //   if(this.fetchedArray[this.rTBD-1].marks==this.fetchedArray[this.rTBD].marks){
-            //     this.wFlag=true
-            //     this.rTBD++;
-            //     // console.log(this.rTBD)
-            //   }else{
-            //     this.wFlag=false
-            //   }
-            // }while(this.wFlag)
+            do{
+              console.log(this.rTBD)
+              if(this.fetchedArray[this.rTBD-1].marks==this.fetchedArray[this.rTBD].marks){
+                this.wFlag=true
+                this.rTBD++;
+                // console.log(this.rTBD)
+              }else{
+                this.wFlag=false
+              }
+            }while(this.wFlag)
             this.studentDetail=this.db.getDetail().slice(0,this.rTBD);
         }
         else{

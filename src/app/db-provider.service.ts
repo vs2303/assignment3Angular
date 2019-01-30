@@ -15,48 +15,51 @@ interface myData{
 export class DbProviderService {
 
   constructor(private http:HttpClient) { }
-  compare(a,b) {
-    if (a.marks < b.marks)
+  compareMarks(a:Student,b:Student) {
+
+    
+    if (+a.marks < +b.marks)
       return -1;
-    if (a.marks > b.marks)
+    if (+a.marks > +b.marks)
       return 1;
     return 0;
   }
+  compareID(a,b){
+    if (+a.id < +b.id)
+      return -1;
+    if (+a.id > +b.id)
+      return 1;
+    return 0;
+  }
+
   fetchedArray:Student[]
+  
   getDetailFromServer():Observable<Student[]>{
-    // return StudentInfo.sort(this.compare).reverse()
     return this.http.get<Student[]>('/api/studentrecord.php');
   }
   getDetail():Student[]{
     this.getDetailFromServer().subscribe(data=>{
+      
       this.fetchedArray = data;
     })
-    return this.fetchedArray.sort(this.compare).reverse()
+    return this.fetchedArray.sort(this.compareID).reverse().sort(this.compareMarks).reverse()
   }
   pushData(newData:Student[]){
-    // for(let i of newData){
-    //   StudentInfo.push(i)
-    // }
-    return this.http.post('/api/insertrecord.php',newData);
+    return this.http.post<myData>('/api/insertrecord.php',newData);
   }
 
   private loggedInStatus = false;
   setLoggedIn(value : boolean){
     this.loggedInStatus= value
-    localStorage.setItem("loggedIn","true")
+    // localStorage.setItem("loggedIn","true")
   }
   get isLoggedIn(){
     return this.loggedInStatus
   }
-
-  
   getUserDetails(username,password){
     return this.http.post<myData>('/api/auth.php',{
       username,
       password
-    })
-    
-  }
-  
-  
+    }) 
+  }  
 }

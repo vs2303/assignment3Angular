@@ -1,28 +1,17 @@
-<div class="container">
-  <div class="card login">
-    
+
     <form (submit)="loginUser($event)">
+      <h1>Login Page</h1><br>
+
       <table>
-        <tr colspan="2">
-          <td>
-            <h1>Login Page</h1>
-          </td>
-        </tr>
         <tr>
           <td><label>Login ID:</label></td>
           <td><input type="text"  id="username" name="username"></td>
         </tr>
         <tr>
           <td><label>Password:</label></td>
-          <td><input type="text" id="password" name="password"></td>
+          <td><input type="password" id="password" name="password"></td>
         </tr>
-        <tr colspan="2">
-          <td>
-            <button type="submit">Login</button>
-          </td>
-        </tr>
-        
-      </table>
+      </table><br>
+      <button class="btn btn-primary" type="submit">Login</button>
+
     </form>
-  </div>
-</div>

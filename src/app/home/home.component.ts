@@ -7,7 +7,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  message="LOading.."
+  message="Loading..."
   constructor(private user:UserService) { }
 
   ngOnInit() {

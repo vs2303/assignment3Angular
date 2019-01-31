@@ -9,10 +9,7 @@ import { Student } from '../student';
 })
 export class StudentDisplayComponent implements OnInit {
   constructor(private db:DbProviderService) { }
-  ngOnInit() {
-    // this.fetchedArray=this.db.getDetail();
-    // this.fArrayLen=this.db.getDetail().length;
-  }
+  ngOnInit() {  }
 
   wFlag:boolean=false
   showTable:boolean=false
@@ -23,36 +20,20 @@ export class StudentDisplayComponent implements OnInit {
   fetchedArray;
   fArrayLen;
   getDetail(){
-      // console.log(this.resultsTBD)
-      // this.showTable=true
-      this.fetchedArray=this.db.getDetail();
-      this.fArrayLen=this.db.getDetail().length;
-      if(this.resultsTBD){
-        if(this.resultsTBD<=this.fArrayLen){
-            this.showTable=true
-            this.rTBD=this.resultsTBD
-            do{
-              console.log(this.rTBD)
-              if(this.fetchedArray[this.rTBD-1].marks==this.fetchedArray[this.rTBD].marks){
-                this.wFlag=true
-                this.rTBD++;
-                // console.log(this.rTBD)
+      if(this.resultsTBD>0){
+        this.db.getDetailFromServer(this.resultsTBD).subscribe(data=>{  
+                 if(data.success){
+                this.showTable=true
+                this.studentDetail = data.data
+                console.log(data.data)
               }else{
-                this.wFlag=false
+                alert(data.data);
               }
-            }while(this.wFlag)
-            this.studentDetail=this.db.getDetail().slice(0,this.rTBD);
-        }
-        else{
-            alert("Only "+(this.db.getDetail().length) +" Records there")
-        }
-        
+            })
       }else{
-          this.showTable=true
-          this.studentDetail=this.db.getDetail()
+        alert("Enter A valid number!!!")
       }
   }
-
   showData(){
     this.getDetail()
   }

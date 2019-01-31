@@ -1,15 +1,10 @@
 
 <br>
 <div class="container">
-  <input type="number" class="form-control" required min="1" max="fArrayLen" id="name" required [(ngModel)]="resultsTBD" name="name" placeholder="Enter the number of records to be displayed"> <br>
+  <input type="number" class="form-control" required id="name" required [(ngModel)]="resultsTBD" name="name" placeholder="Enter the number of toppers to be displayed"> <br>
   
-  <button (click)="showData()" type="submit">Display</button>
+  <button (click)="showData()" type="submit">Display Toppers</button>
   <hr>
-  <!-- <div>
-    <p *ngFor="let stud of studentDetail">
-      {{stud.id}} | {{stud.name}} | {{stud.marks}} <br>
-    </p>
-  </div> -->
   <table>
     <tr *ngIf="showTable">
       <th>ID</th>

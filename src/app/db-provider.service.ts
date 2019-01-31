@@ -9,6 +9,10 @@ interface myData{
   success: boolean,
   message: string
 }
+interface DisplayData{
+  data: Student[] | any,
+  success:boolean
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -34,15 +38,8 @@ export class DbProviderService {
 
   fetchedArray:Student[]
   
-  getDetailFromServer():Observable<Student[]>{
-    return this.http.get<Student[]>('/api/studentrecord.php');
-  }
-  getDetail():Student[]{
-    this.getDetailFromServer().subscribe(data=>{
-      
-      this.fetchedArray = data;
-    })
-    return this.fetchedArray.sort(this.compareID).reverse().sort(this.compareMarks).reverse()
+  getDetailFromServer(data:number):Observable<DisplayData>{
+    return this.http.post<DisplayData>('/api/studentrecord.php',{"limit":data});
   }
   pushData(newData:Student[]){
     return this.http.post<myData>('/api/insertrecord.php',newData);
@@ -51,7 +48,6 @@ export class DbProviderService {
   private loggedInStatus = false;
   setLoggedIn(value : boolean){
     this.loggedInStatus= value
-    // localStorage.setItem("loggedIn","true")
   }
   get isLoggedIn(){
     return this.loggedInStatus

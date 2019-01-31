@@ -34,9 +34,7 @@ export class StudentComponent implements OnInit {
         if (this.studentForm.invalid) {
             return;
         }else{
-          // console.log(this.studentForm.value.student_Details)
           this.db.pushData(this.studentForm.value.student_Details).subscribe(data=>{
-            // console.log(JSON.stringify(data)+"received data")
             if(data.success){
               alert(data.message)
             }
@@ -46,9 +44,6 @@ export class StudentComponent implements OnInit {
           })
         }
     console.log(this.studentForm.controls.student_Details)
-    //Here I am doing Changes
-    // this.db.pushData(this.studentForm.value.student_Details);
-
   }
   
 
@@ -58,9 +53,11 @@ export class StudentComponent implements OnInit {
 
   addSellingPoint() {
   
-    if(this.studentForm.controls.title.value){
+    if(this.studentForm.controls.title.value>0){
       this.showForm=true
       this.hideBox=true
+    }else{
+      alert("Enter number greater than 0")
     }
     
     this.forCnt = this.studentForm.value.title
@@ -76,7 +73,6 @@ export class StudentComponent implements OnInit {
 
   createNew():FormGroup{
     return this.fb.group({
-      // id:['',Validators.required],
       name:['',Validators.required],
       marks:['',Validators.compose([Validators.required,Validators.max(100),Validators.min(0)])]
     })
